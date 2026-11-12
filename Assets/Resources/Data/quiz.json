@@ -1,0 +1,244 @@
+{
+ "questions": [
+  {
+   "topic": "Security",
+   "question": "You see an unattended bag near the hall entrance. What should you do?",
+   "options": [
+    "Open it to check",
+    "Report it to security immediately",
+    "Move it out of the way",
+    "Ignore it"
+   ],
+   "answer": 1,
+   "explain": "Never touch unattended items. Report them to security or soldiers at once."
+  },
+  {
+   "topic": "Security",
+   "question": "When travelling to your PPA, which is the safest choice?",
+   "options": [
+    "Travel at night to avoid traffic",
+    "Use registered motor parks and travel by day",
+    "Accept a free ride from a stranger",
+    "Hitch-hike"
+   ],
+   "answer": 1,
+   "explain": "Travel in daylight using registered transport. Many incidents happen on night journeys."
+  },
+  {
+   "topic": "Health",
+   "question": "Which is the best way to prevent malaria in camp?",
+   "options": [
+    "Sleep under a treated mosquito net",
+    "Drink more sachet water",
+    "Take paracetamol daily",
+    "Sleep with the window open"
+   ],
+   "answer": 0,
+   "explain": "Insecticide-treated nets are one of the most effective protections against malaria."
+  },
+  {
+   "topic": "Health",
+   "question": "What should you drink if you have diarrhoea?",
+   "options": [
+    "Energy drinks",
+    "ORS (oral rehydration solution)",
+    "Alcohol",
+    "Nothing at all"
+   ],
+   "answer": 1,
+   "explain": "ORS replaces lost water and salts. See the clinic if it doesn't stop."
+  },
+  {
+   "topic": "Money",
+   "question": "Your allawee has just come in. What is a smart first step?",
+   "options": [
+    "Spend it on a party",
+    "Set aside rent, food and transport money first",
+    "Lend it all to a friend",
+    "Invest it in a scheme promising 3x returns"
+   ],
+   "answer": 1,
+   "explain": "Budget for needs first. Schemes promising huge returns are usually scams."
+  },
+  {
+   "topic": "Money",
+   "question": "Someone promises to double your money in two weeks. This is most likely:",
+   "options": [
+    "A great investment",
+    "A Ponzi scheme or scam",
+    "A government programme",
+    "A bank product"
+   ],
+   "answer": 1,
+   "explain": "Guaranteed high returns in a short time are a classic sign of a scam."
+  },
+  {
+   "topic": "Service year",
+   "question": "What is monthly clearance?",
+   "options": [
+    "A party at the end of the month",
+    "Signing at your local government office to show you are at your post",
+    "Cleaning your lodge",
+    "Paying your rent"
+   ],
+   "answer": 1,
+   "explain": "Clearance confirms you are serving. Missing it can delay your allawee."
+  },
+  {
+   "topic": "Service year",
+   "question": "What is CDS?",
+   "options": [
+    "A type of exam",
+    "Community Development Service, a weekly group activity",
+    "A bank",
+    "A sports competition"
+   ],
+   "answer": 1,
+   "explain": "CDS groups meet weekly to carry out projects that help the community."
+  },
+  {
+   "topic": "Service year",
+   "question": "What is a PPA?",
+   "options": [
+    "Your Place of Primary Assignment, where you work",
+    "A camp official",
+    "A type of allowance",
+    "Your platoon number"
+   ],
+   "answer": 0,
+   "explain": "Your PPA is the school, office or organisation you serve in after camp."
+  },
+  {
+   "topic": "Service year",
+   "question": "What can happen if you abandon your PPA for long periods?",
+   "options": [
+    "Nothing",
+    "You may get a query or have your service extended",
+    "You get a bonus",
+    "You are posted to Lagos"
+   ],
+   "answer": 1,
+   "explain": "Absconding has serious consequences, including extension of service."
+  },
+  {
+   "topic": "SAED",
+   "question": "What does SAED aim to do for corps members?",
+   "options": [
+    "Teach drill commands",
+    "Help them gain skills to earn a living",
+    "Organise parties",
+    "Pay their rent"
+   ],
+   "answer": 1,
+   "explain": "SAED teaches trades and entrepreneurship so you can earn during and after service."
+  },
+  {
+   "topic": "Road safety",
+   "question": "Which is the most important safety habit in a vehicle?",
+   "options": [
+    "Playing music",
+    "Wearing a seat belt",
+    "Sitting in front",
+    "Sleeping"
+   ],
+   "answer": 1,
+   "explain": "Seat belts greatly reduce the risk of death or serious injury in crashes."
+  },
+  {
+   "topic": "Road safety",
+   "question": "Your driver is speeding and overtaking dangerously. What should you do?",
+   "options": [
+    "Encourage him",
+    "Politely ask him to slow down",
+    "Take a video",
+    "Say nothing"
+   ],
+   "answer": 1,
+   "explain": "Passengers can and should speak up. Your life matters more than arriving early."
+  },
+  {
+   "topic": "Health",
+   "question": "Which habit best prevents typhoid?",
+   "options": [
+    "Drinking clean water and washing hands",
+    "Eating more pepper",
+    "Sleeping more",
+    "Wearing shoes"
+   ],
+   "answer": 0,
+   "explain": "Typhoid spreads through contaminated food and water. Hygiene is the key."
+  },
+  {
+   "topic": "Culture",
+   "question": "You are posted to a community with a culture different from yours. What is best?",
+   "options": [
+    "Mock their customs",
+    "Learn and respect local customs",
+    "Stay inside all year",
+    "Ask for redeployment immediately"
+   ],
+   "answer": 1,
+   "explain": "Respecting local culture builds trust and makes your service year easier and richer."
+  },
+  {
+   "topic": "Security",
+   "question": "A stranger online offers you a well-paid job if you send your BVN and pay a 'processing fee'. You should:",
+   "options": [
+    "Send the details quickly",
+    "Refuse: it's a scam",
+    "Pay half the fee",
+    "Share it with friends"
+   ],
+   "answer": 1,
+   "explain": "Never share your BVN or pay fees for job offers. Real employers don't ask for that."
+  },
+  {
+   "topic": "Money",
+   "question": "Which is a good way to save during the service year?",
+   "options": [
+    "Spend everything and ask family",
+    "Save a fixed amount each month in a separate account",
+    "Keep cash under your mattress",
+    "Buy lottery tickets"
+   ],
+   "answer": 1,
+   "explain": "Automatic monthly saving, even small amounts, adds up by passing out."
+  },
+  {
+   "topic": "Health",
+   "question": "You feel feverish with headache and body pain. You should:",
+   "options": [
+    "Ignore it",
+    "Get tested at a clinic for malaria or typhoid",
+    "Take antibiotics from a friend",
+    "Drink herbs only"
+   ],
+   "answer": 1,
+   "explain": "Test before treating. Self-medication can hide serious illness."
+  },
+  {
+   "topic": "Service year",
+   "question": "What do you need before collecting your certificate at passing out?",
+   "options": [
+    "Final clearance",
+    "A car",
+    "A job offer",
+    "A recommendation from the governor"
+   ],
+   "answer": 0,
+   "explain": "You must complete final clearance before you can collect your certificate."
+  },
+  {
+   "topic": "Camp",
+   "question": "When the bugle sounds at 4:30am, you should:",
+   "options": [
+    "Sleep five more minutes",
+    "Get up and fall in at the parade ground",
+    "Go to Mammy Market",
+    "Bathe first"
+   ],
+   "answer": 1,
+   "explain": "Late-comers get punished. Fall in immediately when the bugle sounds."
+  }
+ ]
+}

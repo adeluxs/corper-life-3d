@@ -1,0 +1,54 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: android-build
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build Corper Life 3D for Android
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Free disk space (Android builds are large)
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+          android: false
+
+      - name: Check out the project
+        uses: actions/checkout@v4
+
+      - name: Cache Unity Library folder
+        uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-Android-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-Android-
+
+      - name: Build with Unity (GameCI)
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          APP_VERSION: 0.1.${{ github.run_number }}
+          VERSION_CODE: ${{ github.run_number }}
+        with:
+          targetPlatform: Android
+          buildName: CorperLife3D
+          buildMethod: CorperLife.EditorTools.BuildScript.BuildAndroid
+          androidExportType: androidPackage
+
+      - name: Upload the APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: CorperLife3D-apk-${{ github.run_number }}
+          path: build/Android
+          retention-days: 14

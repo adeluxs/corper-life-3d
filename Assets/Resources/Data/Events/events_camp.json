@@ -1,0 +1,1066 @@
+{
+ "events": [
+  {
+   "id": "provisions_stolen",
+   "title": "Provisions gone",
+   "text": "You open your box and half your provisions are gone: noodles, milk, Milo. Your bunkmate is pretending to sleep.",
+   "stage": "Camp",
+   "location": "hostel",
+   "minDay": 2,
+   "maxDay": 21,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Confront him",
+     "cost": 0,
+     "effects": {
+      "mood": 4,
+      "result": "He admits it and promises to replace them. Respect."
+     },
+     "riskChance": 0.5,
+     "riskEffects": {
+      "mood": -8,
+      "repCommunity": -2,
+      "result": "He swears it wasn't him. Now the room is tense."
+     }
+    },
+    {
+     "label": "Report to the camp official",
+     "cost": 0,
+     "effects": {
+      "repNysc": 1,
+      "mood": -2,
+      "result": "The official warns the whole hostel. Your things are safer now."
+     }
+    },
+    {
+     "label": "Let it go and buy a padlock",
+     "cost": 1200,
+     "effects": {
+      "mood": -3,
+      "addFlag": "has_padlock",
+      "result": "Lesson learnt. Your box is locked from now on."
+     }
+    }
+   ]
+  },
+  {
+   "id": "mosquito_night",
+   "title": "Mosquito attack",
+   "text": "It's 2am and mosquitoes are singing in your ears. You can't sleep.",
+   "stage": "Camp",
+   "location": "hostel",
+   "minDay": 1,
+   "maxDay": 21,
+   "minHour": 20,
+   "maxHour": 24,
+   "weight": 14,
+   "once": true,
+   "choices": [
+    {
+     "label": "Buy a net tomorrow at Mammy Market",
+     "cost": 0,
+     "effects": {
+      "energy": -12,
+      "mood": -6,
+      "health": -4,
+      "result": "You lose sleep tonight but you'll be prepared."
+     }
+    },
+    {
+     "label": "Borrow your bunkmate's insecticide",
+     "cost": 0,
+     "effects": {
+      "energy": -4,
+      "health": -2,
+      "repCommunity": 1,
+      "result": "Sprayed. Everyone coughs, but you sleep."
+     }
+    }
+   ],
+   "blockedByFlag": "has_net"
+  },
+  {
+   "id": "phone_dead",
+   "title": "Phone at 2%",
+   "text": "Your mum is calling and your phone is about to die. The charging queue at Mammy Market is long.",
+   "stage": "Camp",
+   "location": "any",
+   "minDay": 1,
+   "maxDay": 21,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Pay for fast charging",
+     "cost": 300,
+     "effects": {
+      "mood": 8,
+      "result": "You catch her call. She sends her love."
+     }
+    },
+    {
+     "label": "Borrow a friend's power bank",
+     "cost": 0,
+     "effects": {
+      "mood": 5,
+      "repCommunity": 2,
+      "addFlag": "friend_powerbank",
+      "result": "Your platoon mate helps you out. New friend!"
+     }
+    },
+    {
+     "label": "Let it die",
+     "cost": 0,
+     "effects": {
+      "mood": -6,
+      "result": "She'll worry, but you'll call tomorrow."
+     }
+    }
+   ]
+  },
+  {
+   "id": "soldier_check",
+   "title": "Hostel inspection",
+   "text": "Soldiers burst into the hostel for a surprise inspection. Your bunk is a mess.",
+   "stage": "Camp",
+   "location": "hostel",
+   "minDay": 3,
+   "maxDay": 21,
+   "minHour": 6,
+   "maxHour": 20,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Quickly tidy up",
+     "cost": 0,
+     "effects": {
+      "energy": -4,
+      "repNysc": 2,
+      "result": "You fixed it just in time. The soldier nods."
+     }
+    },
+    {
+     "label": "Stand at attention and hope",
+     "cost": 0,
+     "effects": {
+      "result": "He walked past your bunk. Lucky."
+     },
+     "riskChance": 0.6,
+     "riskEffects": {
+      "energy": -12,
+      "mood": -6,
+      "repNysc": -2,
+      "result": "\"Whose bed be this?\" Frog jump, 20 times."
+     }
+    }
+   ]
+  },
+  {
+   "id": "rain_parade",
+   "title": "Rain at parade",
+   "text": "Heavy rain starts in the middle of the parade. Nobody is allowed to leave.",
+   "stage": "Camp",
+   "location": "parade",
+   "minDay": 3,
+   "maxDay": 21,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 8,
+   "once": true,
+   "choices": [
+    {
+     "label": "Stand firm in the rain",
+     "cost": 0,
+     "effects": {
+      "health": -6,
+      "hygiene": -10,
+      "repNysc": 3,
+      "mood": 2,
+      "result": "Soaked but proud. The commandant praised your platoon."
+     }
+    },
+    {
+     "label": "Run for shelter",
+     "cost": 0,
+     "effects": {
+      "repNysc": -4,
+      "mood": -2,
+      "result": "A soldier saw you. Your name is written down."
+     }
+    }
+   ]
+  },
+  {
+   "id": "food_poison",
+   "title": "Running stomach",
+   "text": "That jollof from the kitchen was not your friend. Your stomach is turning.",
+   "stage": "Camp",
+   "location": "any",
+   "minDay": 2,
+   "maxDay": 21,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Go to the clinic",
+     "cost": 0,
+     "effects": {
+      "health": 12,
+      "energy": -8,
+      "skipMinutes": 120,
+      "result": "The nurse gives you ORS and flagyl. You rest for two hours."
+     }
+    },
+    {
+     "label": "Buy drugs at Mammy Market",
+     "cost": 800,
+     "effects": {
+      "health": 8,
+      "mood": -3,
+      "result": "It helps a bit."
+     }
+    },
+    {
+     "label": "Endure it",
+     "cost": 0,
+     "effects": {
+      "health": -15,
+      "energy": -10,
+      "mood": -8,
+      "result": "Bad idea. You feel terrible all day."
+     }
+    }
+   ]
+  },
+  {
+   "id": "mammy_haggle",
+   "title": "Mammy Market haggling",
+   "text": "Iya Basira wants N2,500 for rice, stew and meat. Your friends say it should be N1,800.",
+   "stage": "Camp",
+   "location": "market",
+   "minDay": 1,
+   "maxDay": 21,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 12,
+   "once": true,
+   "choices": [
+    {
+     "label": "Pay N2,500 and smile",
+     "cost": 2500,
+     "effects": {
+      "hunger": 45,
+      "mood": 6,
+      "repCommunity": 2,
+      "result": "She adds extra plantain. \"My corper!\""
+     }
+    },
+    {
+     "label": "Haggle hard (N1,800)",
+     "cost": 1800,
+     "effects": {
+      "hunger": 40,
+      "mood": 3,
+      "result": "She gives in. Good deal."
+     },
+     "riskChance": 0.4,
+     "riskEffects": {
+      "hunger": 20,
+      "mood": -3,
+      "result": "She hisses and serves you a small portion."
+     }
+    },
+    {
+     "label": "Walk away",
+     "cost": 0,
+     "effects": {
+      "mood": -2,
+      "result": "You go back to camp food."
+     }
+    }
+   ]
+  },
+  {
+   "id": "bunkmate_snores",
+   "title": "The snoring",
+   "text": "Your bunkmate snores like a generator. It's 1am.",
+   "stage": "Camp",
+   "location": "hostel",
+   "minDay": 1,
+   "maxDay": 21,
+   "minHour": 21,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Wake him gently",
+     "cost": 0,
+     "effects": {
+      "energy": -2,
+      "repCommunity": 1,
+      "result": "He apologises and turns over. Peace."
+     }
+    },
+    {
+     "label": "Use earphones",
+     "cost": 0,
+     "effects": {
+      "energy": -3,
+      "result": "You sleep with music playing. It works."
+     }
+    },
+    {
+     "label": "Suffer in silence",
+     "cost": 0,
+     "effects": {
+      "energy": -10,
+      "mood": -5,
+      "result": "Very little sleep tonight."
+     }
+    }
+   ]
+  },
+  {
+   "id": "platoon_leader_call",
+   "title": "Platoon needs you",
+   "text": "Your platoon leader asks for volunteers to practise for the cultural dance competition.",
+   "stage": "Camp",
+   "location": "any",
+   "minDay": 5,
+   "maxDay": 13,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Volunteer",
+     "cost": 0,
+     "effects": {
+      "energy": -10,
+      "mood": 12,
+      "repNysc": 2,
+      "repCommunity": 3,
+      "addFlag": "cultural_dancer",
+      "result": "You join the dance group. Hard work, lots of fun."
+     }
+    },
+    {
+     "label": "Make an excuse",
+     "cost": 0,
+     "effects": {
+      "mood": -2,
+      "result": "Someone else takes your place."
+     }
+    }
+   ]
+  },
+  {
+   "id": "lost_id",
+   "title": "Lost ID card",
+   "text": "You can't find your camp ID card anywhere and there is a check at the hall entrance.",
+   "stage": "Camp",
+   "location": "any",
+   "minDay": 3,
+   "maxDay": 21,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 6,
+   "once": true,
+   "choices": [
+    {
+     "label": "Search everywhere",
+     "cost": 0,
+     "effects": {
+      "energy": -6,
+      "skipMinutes": 40,
+      "result": "Found it under your mattress. Phew."
+     }
+    },
+    {
+     "label": "Pay for a replacement",
+     "cost": 1000,
+     "effects": {
+      "repNysc": -1,
+      "result": "The camp office prints a new one."
+     }
+    }
+   ]
+  },
+  {
+   "id": "friend_birthday",
+   "title": "Birthday in the platoon",
+   "text": "It's Ngozi's birthday and the platoon is contributing money for a small celebration.",
+   "stage": "Camp",
+   "location": "any",
+   "minDay": 4,
+   "maxDay": 21,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Contribute N1,000",
+     "cost": 1000,
+     "effects": {
+      "mood": 14,
+      "repCommunity": 4,
+      "result": "Cake, soft drinks and dancing at Mammy Market. Great night."
+     }
+    },
+    {
+     "label": "Contribute N300",
+     "cost": 300,
+     "effects": {
+      "mood": 6,
+      "repCommunity": 1,
+      "result": "Small, but they appreciate it."
+     }
+    },
+    {
+     "label": "Skip it",
+     "cost": 0,
+     "effects": {
+      "mood": -4,
+      "repCommunity": -3,
+      "result": "They noticed you didn't come."
+     }
+    }
+   ]
+  },
+  {
+   "id": "fake_job_offer",
+   "title": "\"Business opportunity\"",
+   "text": "A smooth-talking corper says if you give him N5,000 now, his 'investment platform' will pay you N15,000 by passing out.",
+   "stage": "Camp",
+   "location": "any",
+   "minDay": 6,
+   "maxDay": 21,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Invest N5,000",
+     "cost": 5000,
+     "effects": {
+      "result": ""
+     },
+     "riskChance": 1.0,
+     "riskEffects": {
+      "mood": -14,
+      "addFlag": "scammed_once",
+      "result": "Two weeks later his number is switched off. It was a Ponzi scheme."
+     }
+    },
+    {
+     "label": "Ask for proof and registration",
+     "cost": 0,
+     "effects": {
+      "mood": 3,
+      "addFlag": "scam_aware",
+      "result": "He changes the topic and walks off. Good instinct."
+     }
+    },
+    {
+     "label": "Decline politely",
+     "cost": 0,
+     "effects": {
+      "mood": 1,
+      "result": "You keep your money."
+     }
+    }
+   ]
+  },
+  {
+   "id": "generator_off",
+   "title": "Light off",
+   "text": "The camp generator goes off during a heatwave. The hostel is boiling.",
+   "stage": "Camp",
+   "location": "hostel",
+   "minDay": 1,
+   "maxDay": 21,
+   "minHour": 20,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Sleep outside on a mat",
+     "cost": 0,
+     "effects": {
+      "energy": 4,
+      "health": -5,
+      "result": "Cooler, but mosquitoes feast on you."
+     }
+    },
+    {
+     "label": "Fan yourself and endure",
+     "cost": 0,
+     "effects": {
+      "energy": -6,
+      "hygiene": -8,
+      "mood": -4,
+      "result": "Sweaty, short sleep."
+     }
+    }
+   ]
+  },
+  {
+   "id": "mr_macaroni",
+   "title": "Strict soldier",
+   "text": "The strictest soldier in camp catches your platoon talking during drill.",
+   "stage": "Camp",
+   "location": "parade",
+   "minDay": 3,
+   "maxDay": 21,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Apologise with your platoon",
+     "cost": 0,
+     "effects": {
+      "repNysc": 1,
+      "mood": -2,
+      "result": "\"Next time, you will roll in the mud.\" You got away with a warning."
+     }
+    },
+    {
+     "label": "Laugh it off",
+     "cost": 0,
+     "effects": {
+      "energy": -15,
+      "mood": -8,
+      "repCommunity": -4,
+      "result": "Your whole platoon does 50 frog jumps because of you."
+     }
+    }
+   ]
+  },
+  {
+   "id": "lecture_sleep",
+   "title": "Sleepy lecture",
+   "text": "The lecture on road safety is long and the hall is warm. Your eyes are closing.",
+   "stage": "Camp",
+   "location": "hall",
+   "minDay": 1,
+   "maxDay": 21,
+   "minHour": 9,
+   "maxHour": 13,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Pinch yourself and stay awake",
+     "cost": 0,
+     "effects": {
+      "energy": -4,
+      "repNysc": 1,
+      "result": "You learnt something about defensive driving."
+     }
+    },
+    {
+     "label": "Sleep with your head down",
+     "cost": 0,
+     "effects": {
+      "energy": 8,
+      "result": "Nobody noticed. Nice nap."
+     },
+     "riskChance": 0.5,
+     "riskEffects": {
+      "mood": -6,
+      "repNysc": -2,
+      "result": "An official taps your head in front of everyone."
+     }
+    }
+   ]
+  },
+  {
+   "id": "bank_alert",
+   "title": "Bank alert",
+   "text": "Your uncle in Abuja sent you money with a message: \"Make good use of your service year.\"",
+   "stage": "Camp",
+   "location": "any",
+   "minDay": 7,
+   "maxDay": 21,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 5,
+   "once": true,
+   "choices": [
+    {
+     "label": "Say thank you",
+     "cost": 0,
+     "effects": {
+      "money": 5000,
+      "mood": 12,
+      "result": "You call him to say thanks. He's proud of you."
+     }
+    }
+   ]
+  },
+  {
+   "id": "water_queue",
+   "title": "Water wahala",
+   "text": "The taps are dry this morning. There's a long queue at the borehole with buckets.",
+   "stage": "Camp",
+   "location": "hostel",
+   "minDay": 1,
+   "maxDay": 21,
+   "minHour": 5,
+   "maxHour": 9,
+   "weight": 12,
+   "once": true,
+   "choices": [
+    {
+     "label": "Queue for water",
+     "cost": 0,
+     "effects": {
+      "hygiene": 40,
+      "energy": -6,
+      "skipMinutes": 40,
+      "result": "It takes 40 minutes but you bathe."
+     }
+    },
+    {
+     "label": "Buy sachet water to bathe",
+     "cost": 600,
+     "effects": {
+      "hygiene": 35,
+      "result": "Expensive bath, but fast."
+     }
+    },
+    {
+     "label": "Skip the bath today",
+     "cost": 0,
+     "effects": {
+      "hygiene": -8,
+      "mood": -3,
+      "result": "You spray perfume and hope."
+     }
+    }
+   ]
+  },
+  {
+   "id": "night_party",
+   "title": "Night party",
+   "text": "Some corpers invite you to a secret party behind the hostels after lights out.",
+   "stage": "Camp",
+   "location": "hostel",
+   "minDay": 5,
+   "maxDay": 21,
+   "minHour": 21,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Go for a short while",
+     "cost": 0,
+     "effects": {
+      "mood": 12,
+      "energy": -10,
+      "result": "Music, suya and laughter. You sneak back unseen."
+     },
+     "riskChance": 0.35,
+     "riskEffects": {
+      "energy": -15,
+      "repNysc": -5,
+      "mood": -4,
+      "result": "Soldiers raid it. You are punished with grass-cutting."
+     }
+    },
+    {
+     "label": "Stay in and sleep",
+     "cost": 0,
+     "effects": {
+      "energy": 6,
+      "result": "You wake up fresh while they look tired."
+     }
+    }
+   ]
+  },
+  {
+   "id": "crush",
+   "title": "Someone likes you",
+   "text": "A corper from Platoon 4 keeps smiling at you in the hall. Your friends are teasing you.",
+   "stage": "Camp",
+   "location": "any",
+   "minDay": 6,
+   "maxDay": 19,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Go and say hello",
+     "cost": 0,
+     "effects": {
+      "mood": 14,
+      "addFlag": "camp_crush",
+      "result": "You talk for an hour at Mammy Market. You exchange numbers."
+     }
+    },
+    {
+     "label": "Play it cool",
+     "cost": 0,
+     "effects": {
+      "mood": 1,
+      "result": "Maybe another time."
+     }
+    }
+   ]
+  },
+  {
+   "id": "crush_date",
+   "title": "Mammy Market date",
+   "text": "Your camp crush asks you to share a plate of suya at Mammy Market tonight.",
+   "stage": "Camp",
+   "location": "any",
+   "minDay": 8,
+   "maxDay": 21,
+   "minHour": 18,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Pay for both (N3,000)",
+     "cost": 3000,
+     "effects": {
+      "mood": 18,
+      "addFlag": "camp_couple",
+      "result": "Lovely evening. People are already calling you a couple."
+     }
+    },
+    {
+     "label": "Split the bill",
+     "cost": 1500,
+     "effects": {
+      "mood": 12,
+      "result": "Fair and fun. You laugh a lot."
+     }
+    },
+    {
+     "label": "Say you're busy",
+     "cost": 0,
+     "effects": {
+      "mood": -5,
+      "removeFlag": "camp_crush",
+      "result": "They look disappointed."
+     }
+    }
+   ],
+   "requiresFlag": "camp_crush"
+  },
+  {
+   "id": "sick_heat",
+   "title": "Heat exhaustion",
+   "text": "After hours in the sun you feel dizzy and weak.",
+   "stage": "Camp",
+   "location": "any",
+   "minDay": 3,
+   "maxDay": 21,
+   "minHour": 11,
+   "maxHour": 17,
+   "weight": 8,
+   "once": true,
+   "choices": [
+    {
+     "label": "Drink water and rest in the shade",
+     "cost": 0,
+     "effects": {
+      "health": 6,
+      "energy": 4,
+      "skipMinutes": 30,
+      "result": "You recover slowly."
+     }
+    },
+    {
+     "label": "Push through",
+     "cost": 0,
+     "effects": {
+      "health": -10,
+      "energy": -10,
+      "result": "Your head is pounding."
+     }
+    }
+   ]
+  },
+  {
+   "id": "pageant",
+   "title": "Camp pageant",
+   "text": "Your platoon wants you to represent them in the Mr and Miss NYSC camp pageant.",
+   "stage": "Camp",
+   "location": "any",
+   "minDay": 15,
+   "maxDay": 18,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Accept and buy an outfit",
+     "cost": 4000,
+     "effects": {
+      "mood": 20,
+      "repNysc": 3,
+      "repCommunity": 5,
+      "addFlag": "pageant_contestant",
+      "result": "You walk the runway in Ankara. The crowd screams your platoon's name."
+     }
+    },
+    {
+     "label": "Decline",
+     "cost": 0,
+     "effects": {
+      "mood": -1,
+      "result": "Someone else represents you."
+     }
+    }
+   ]
+  },
+  {
+   "id": "football_final",
+   "title": "Inter-platoon final",
+   "text": "Your platoon reached the football final. The coach wants you on the pitch.",
+   "stage": "Camp",
+   "location": "field",
+   "minDay": 10,
+   "maxDay": 12,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Play",
+     "cost": 0,
+     "effects": {
+      "energy": -18,
+      "mood": 22,
+      "repNysc": 3,
+      "repCommunity": 5,
+      "result": "You won! Your platoon carries you on their shoulders."
+     },
+     "riskChance": 0.45,
+     "riskEffects": {
+      "energy": -18,
+      "mood": 4,
+      "repCommunity": 2,
+      "result": "You lost 2-1, but you played well."
+     }
+    },
+    {
+     "label": "Cheer from the side",
+     "cost": 0,
+     "effects": {
+      "mood": 8,
+      "result": "Great atmosphere either way."
+     }
+    }
+   ]
+  },
+  {
+   "id": "charity",
+   "title": "Corper in need",
+   "text": "A corper in your hostel has no money left and hasn't eaten today.",
+   "stage": "Camp",
+   "location": "any",
+   "minDay": 8,
+   "maxDay": 21,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Buy them food (N1,000)",
+     "cost": 1000,
+     "effects": {
+      "mood": 8,
+      "repCommunity": 5,
+      "result": "They thank you with tears in their eyes."
+     }
+    },
+    {
+     "label": "Share your provisions",
+     "cost": 0,
+     "effects": {
+      "hunger": -10,
+      "mood": 6,
+      "repCommunity": 4,
+      "result": "Noodles for two."
+     }
+    },
+    {
+     "label": "Pretend not to notice",
+     "cost": 0,
+     "effects": {
+      "mood": -6,
+      "result": "You feel bad about it later."
+     }
+    }
+   ]
+  },
+  {
+   "id": "obs_interview",
+   "title": "Camp radio interview",
+   "text": "The OBS camp media team wants to interview you about camp life.",
+   "stage": "Camp",
+   "location": "any",
+   "minDay": 4,
+   "maxDay": 21,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Do the interview",
+     "cost": 0,
+     "effects": {
+      "mood": 10,
+      "repNysc": 2,
+      "result": "Your voice is on camp radio. Friends tease you all day."
+     }
+    },
+    {
+     "label": "Decline shyly",
+     "cost": 0,
+     "effects": {
+      "mood": 0,
+      "result": "Maybe next time."
+     }
+    }
+   ]
+  },
+  {
+   "id": "posting_rumour",
+   "title": "Posting rumours",
+   "text": "Rumour says you can 'arrange' a good PPA posting by paying an official N20,000.",
+   "stage": "Camp",
+   "location": "any",
+   "minDay": 16,
+   "maxDay": 20,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Ignore it",
+     "cost": 0,
+     "effects": {
+      "repNysc": 2,
+      "addFlag": "integrity",
+      "result": "Posting is supposed to be fair. You'll take what comes."
+     }
+    },
+    {
+     "label": "Ask around more",
+     "cost": 0,
+     "effects": {
+      "mood": -1,
+      "result": "Nobody can confirm anything. You drop it."
+     },
+     "riskChance": 0.6,
+     "riskEffects": {
+      "mood": -4,
+      "addFlag": "scam_aware",
+      "result": "Turns out it was a scam targeting corpers. You almost fell for it."
+     }
+    }
+   ]
+  },
+  {
+   "id": "market_tailor",
+   "title": "Customised khaki",
+   "text": "A tailor at Mammy Market offers to customise your khaki with your name and state code.",
+   "stage": "Camp",
+   "location": "market",
+   "minDay": 3,
+   "maxDay": 21,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Do it (N2,000)",
+     "cost": 2000,
+     "effects": {
+      "mood": 8,
+      "addFlag": "khaki_custom",
+      "result": "Your khaki looks sharp now."
+     }
+    },
+    {
+     "label": "No thanks",
+     "cost": 0,
+     "effects": {
+      "result": "You keep your money."
+     }
+    }
+   ],
+   "requiresFlag": "kit_collected"
+  },
+  {
+   "id": "homesick",
+   "title": "Missing home",
+   "text": "Lying on your bunk, you miss home and your mum's cooking.",
+   "stage": "Camp",
+   "location": "hostel",
+   "minDay": 2,
+   "maxDay": 8,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 8,
+   "once": true,
+   "choices": [
+    {
+     "label": "Call home",
+     "cost": 0,
+     "effects": {
+      "mood": 10,
+      "result": "Hearing their voices helps."
+     }
+    },
+    {
+     "label": "Talk to your bunkmate",
+     "cost": 0,
+     "effects": {
+      "mood": 8,
+      "repCommunity": 2,
+      "result": "Turns out he misses home too. You bond."
+     }
+    },
+    {
+     "label": "Scroll your phone",
+     "cost": 0,
+     "effects": {
+      "mood": -2,
+      "result": "It doesn't really help."
+     }
+    }
+   ]
+  }
+ ]
+}
