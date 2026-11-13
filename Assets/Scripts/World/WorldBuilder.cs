@@ -131,7 +131,8 @@ namespace CorperLife
                 go = new GameObject();
                 var model = Instantiate(prefab, go.transform);
                 model.name = "Model";
-                model.transform.localRotation = Quaternion.Euler(0, ModelYawOffset, 0);
+                // Keep the FBX's own upright rotation and only add the facing offset on top.
+                model.transform.localRotation = Quaternion.Euler(0, ModelYawOffset, 0) * prefab.transform.localRotation;
             }
             else
             {

@@ -44,23 +44,26 @@ namespace CorperLife
             p.skinTone = 2;
 
             var panel = UIFactory.Panel("Panel", transform, Palette.PanelBg);
-            panel.rectTransform.Anchor(new Vector2(0.03f, 0.05f), new Vector2(0.48f, 0.95f));
-            var stack = UIFactory.Rect("Stack", panel.transform).Stretch(36);
-            UIFactory.VStack(stack, 14);
+            panel.rectTransform.Anchor(new Vector2(0.02f, 0.04f), new Vector2(0.5f, 0.96f));
+            var stack = UIFactory.Rect("Stack", panel.transform).Stretch(26);
+            UIFactory.VStack(stack, 10);
 
-            UIFactory.Label("Title", stack, "Create your corper", 46, Palette.TextMain, TextAnchor.MiddleLeft, FontStyle.Bold).Height(64);
+            UIFactory.Label("Title", stack, "Create your corper", 40, Palette.TextMain, TextAnchor.MiddleLeft, FontStyle.Bold).Height(52);
 
-            firstField = Field(stack, "First name", p.firstName);
-            lastField = Field(stack, "Surname", p.lastName);
+            // Names side by side
+            var nameRow = Row(stack, 66);
+            firstField = Field(nameRow, "First name", p.firstName);
+            lastField = Field(nameRow, "Surname", p.lastName);
 
             // Gender
-            var gRow = Row(stack, 76);
+            var gRow = Row(stack, 64);
             maleBtn = UIFactory.Button("Male", gRow, "Male", Palette.Accent, () => SetFemale(false), 28);
             femaleBtn = UIFactory.Button("Female", gRow, "Female", new Color(1, 1, 1, 0.12f), () => SetFemale(true), 28);
 
             // Skin tone
-            UIFactory.Label("SkinLabel", stack, "Skin tone", 24, Palette.TextDim).Height(32);
-            var sRow = Row(stack, 70);
+            var sRow = Row(stack, 60);
+            var skinLabel = UIFactory.Label("SkinLabel", sRow, "Skin", 24, Palette.TextDim);
+            skinLabel.gameObject.AddComponent<LayoutElement>().flexibleWidth = 0.6f;
             skinSwatches = new Image[Palette.SkinTones.Length];
             for (int i = 0; i < Palette.SkinTones.Length; i++)
             {
@@ -76,9 +79,11 @@ namespace CorperLife
             bgText = Cycler(stack, "Family", () => { bgIdx = (bgIdx + 2) % 3; Refresh(); },
                 () => { bgIdx = (bgIdx + 1) % 3; Refresh(); });
             bgInfo = UIFactory.Label("BgInfo", stack, "", 22, Palette.TextDim);
-            bgInfo.Height(34);
+            bgInfo.Height(56);
 
-            UIFactory.Button("Start", stack, "Print call-up letter and go to camp", Palette.Accent, Finish, 30).Height(92);
+            // Big start button on the right, always visible
+            var start = UIFactory.Button("Start", transform, "Go to camp  >", Palette.Accent, Finish, 38);
+            ((RectTransform)start.transform).Anchor(new Vector2(1, 0), new Vector2(1, 0), new Vector2(-560, 40), new Vector2(-40, 160));
 
             Refresh();
         }
@@ -86,12 +91,11 @@ namespace CorperLife
         InputField Field(Transform parent, string placeholder, string value)
         {
             var bg = UIFactory.Panel(placeholder, parent, new Color(1, 1, 1, 0.1f));
-            bg.Height(72);
-            var text = UIFactory.Label("Text", bg.transform, value, 30, Palette.TextMain);
+            var text = UIFactory.Label("Text", bg.transform, value, 28, Palette.TextMain);
             text.rectTransform.Stretch(18);
             text.raycastTarget = true;
             text.supportRichText = false;
-            var ph = UIFactory.Label("Placeholder", bg.transform, placeholder, 30, Palette.TextDim, TextAnchor.MiddleLeft, FontStyle.Italic);
+            var ph = UIFactory.Label("Placeholder", bg.transform, placeholder, 28, Palette.TextDim, TextAnchor.MiddleLeft, FontStyle.Italic);
             ph.rectTransform.Stretch(18);
             var f = bg.gameObject.AddComponent<InputField>();
             f.textComponent = text;
@@ -117,14 +121,15 @@ namespace CorperLife
 
         Text Cycler(Transform parent, string label, UnityEngine.Events.UnityAction prev, UnityEngine.Events.UnityAction next)
         {
-            UIFactory.Label(label + "Label", parent, label, 24, Palette.TextDim).Height(30);
-            var row = Row(parent, 70);
-            var l = UIFactory.Button("Prev", row, "<", new Color(1, 1, 1, 0.12f), prev, 34);
-            l.gameObject.AddComponent<LayoutElement>().flexibleWidth = 0.2f;
-            var t = UIFactory.Label("Value", row, "", 28, Palette.TextMain, TextAnchor.MiddleCenter, FontStyle.Bold);
-            t.gameObject.AddComponent<LayoutElement>().flexibleWidth = 1f;
-            var r = UIFactory.Button("Next", row, ">", new Color(1, 1, 1, 0.12f), next, 34);
-            r.gameObject.AddComponent<LayoutElement>().flexibleWidth = 0.2f;
+            var row = Row(parent, 62);
+            var l0 = UIFactory.Label(label + "Label", row, label, 24, Palette.TextDim);
+            l0.gameObject.AddComponent<LayoutElement>().flexibleWidth = 0.55f;
+            var l = UIFactory.Button("Prev", row, "<", new Color(1, 1, 1, 0.12f), prev, 32);
+            l.gameObject.AddComponent<LayoutElement>().flexibleWidth = 0.25f;
+            var t = UIFactory.Label("Value", row, "", 26, Palette.TextMain, TextAnchor.MiddleCenter, FontStyle.Bold);
+            t.gameObject.AddComponent<LayoutElement>().flexibleWidth = 1.1f;
+            var r = UIFactory.Button("Next", row, ">", new Color(1, 1, 1, 0.12f), next, 32);
+            r.gameObject.AddComponent<LayoutElement>().flexibleWidth = 0.25f;
             return t;
         }
 
@@ -161,7 +166,7 @@ namespace CorperLife
             maleBtn.GetComponent<Image>().color = p.isFemale ? new Color(1, 1, 1, 0.12f) : Palette.Accent;
             femaleBtn.GetComponent<Image>().color = p.isFemale ? Palette.Accent : new Color(1, 1, 1, 0.12f);
             for (int i = 0; i < skinSwatches.Length; i++)
-                skinSwatches[i].transform.localScale = i == p.skinTone ? Vector3.one * 1.12f : Vector3.one * 0.86f;
+                skinSwatches[i].transform.localScale = i == p.skinTone ? Vector3.one : Vector3.one * 0.72f;
 
             GameManager.I?.World?.ApplyProfile(p, false);
         }
