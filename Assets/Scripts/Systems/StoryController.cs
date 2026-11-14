@@ -88,8 +88,8 @@ namespace CorperLife
             S.AddFlag("kit_collected");
             gm.World.ApplyProfile(S.profile, true);
             UI.Dialog("Kit collected",
-                "White tees, white shorts, khaki, jungle boots, canvas shoes, face cap and socks.\n\n" +
-                "The khaki is two sizes too big.",
+                "White tees, white shorts, white socks and canvas shoes for camp, plus khaki, jungle boots and a face cap for ceremonies.\n\n" +
+                "You change into your whites straight away. But the khaki is two sizes too big.",
                 new DialogButton("Pay a camp tailor to adjust it (" + Palette.Naira(1500) + ")", () =>
                 {
                     if (EconomySystem.TrySpend(S, 1500, "Tailor adjusted khaki"))

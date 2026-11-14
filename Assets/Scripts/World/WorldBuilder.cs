@@ -25,7 +25,7 @@ namespace CorperLife
         readonly List<GameObject> hairF = new List<GameObject>();
 
         /// <summary>Turn the model if it ever imports facing backwards (Blender -Y should become Unity +Z).</summary>
-        public const float ModelYawOffset = 0f;
+        public const float ModelYawOffset = 180f;
         float locTimer;
 
         public void Build(VirtualJoystick joystick)

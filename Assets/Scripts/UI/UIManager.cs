@@ -256,7 +256,7 @@ namespace CorperLife
             var screen = UIFactory.Panel("MainMenu", Root, new Color(0.04f, 0.06f, 0.05f, 0.82f), false);
             screen.rectTransform.Stretch();
 
-            var title = UIFactory.Label("Title", screen.transform, "CORPER LIFE 3D", 110, Palette.TextMain, TextAnchor.MiddleCenter, FontStyle.Bold);
+            var title = UIFactory.Label("Title", screen.transform, "CORPER WEE", 110, Palette.TextMain, TextAnchor.MiddleCenter, FontStyle.Bold);
             title.rectTransform.Anchor(new Vector2(0, 0.66f), new Vector2(1, 0.88f));
             var sub = UIFactory.Label("Sub", screen.transform, "Camp. PPA. Allawee. Wahala. Your service year.", 34, Palette.TextDim, TextAnchor.MiddleCenter);
             sub.rectTransform.Anchor(new Vector2(0, 0.58f), new Vector2(1, 0.66f));

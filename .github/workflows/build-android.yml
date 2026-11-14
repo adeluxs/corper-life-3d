@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   build:
-    name: Build Corper Life 3D for Android
+    name: Build Corper Wee for Android
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -42,13 +42,13 @@ jobs:
           VERSION_CODE: ${{ github.run_number }}
         with:
           targetPlatform: Android
-          buildName: CorperLife3D
+          buildName: CorperWee
           buildMethod: CorperLife.EditorTools.BuildScript.BuildAndroid
           androidExportType: androidPackage
 
       - name: Upload the APK
         uses: actions/upload-artifact@v4
         with:
-          name: CorperLife3D-apk-${{ github.run_number }}
+          name: CorperWee-apk-${{ github.run_number }}
           path: build/Android
           retention-days: 14

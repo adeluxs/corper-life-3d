@@ -11,13 +11,13 @@ namespace CorperLife.EditorTools
     /// <summary>
     /// Creates the game scene and builds the Android APK/AAB.
     /// Used by GitHub Actions (GameCI) so nobody has to set up scenes by hand.
-    /// Menu: Corper Life > Build Android APK.
+    /// Menu: Corper Wee > Build Android APK.
     /// </summary>
     public static class BuildScript
     {
         const string ScenePath = "Assets/Scenes/Main.unity";
 
-        [MenuItem("Corper Life/Create Main Scene")]
+        [MenuItem("Corper Wee/Create Main Scene")]
         public static void CreateScene()
         {
             Directory.CreateDirectory("Assets/Scenes");
@@ -33,8 +33,8 @@ namespace CorperLife.EditorTools
         static void ConfigurePlayer()
         {
             PlayerSettings.companyName = "Swiftmynd Technologies Ltd";
-            PlayerSettings.productName = "Corper Life 3D";
-            PlayerSettings.SetApplicationIdentifier(UnityEditor.Build.NamedBuildTarget.Android, "com.swiftmynd.corperlife3d");
+            PlayerSettings.productName = "Corper Wee";
+            PlayerSettings.SetApplicationIdentifier(UnityEditor.Build.NamedBuildTarget.Android, "com.swiftmynd.corperwee");
             PlayerSettings.bundleVersion = Env("APP_VERSION", "0.1.0");
             PlayerSettings.Android.bundleVersionCode = int.TryParse(Env("VERSION_CODE", "1"), out var vc) ? vc : 1;
 
@@ -71,13 +71,13 @@ namespace CorperLife.EditorTools
             return fallback;
         }
 
-        [MenuItem("Corper Life/Build Android APK")]
+        [MenuItem("Corper Wee/Build Android APK")]
         public static void BuildAndroid()
         {
             CreateScene();
             ConfigurePlayer();
 
-            string path = Arg("-customBuildPath", "Builds/Android/CorperLife3D.apk");
+            string path = Arg("-customBuildPath", "Builds/Android/CorperWee.apk");
             bool aab = path.EndsWith(".aab");
             EditorUserBuildSettings.buildAppBundle = aab;
             Directory.CreateDirectory(Path.GetDirectoryName(path) ?? "Builds");

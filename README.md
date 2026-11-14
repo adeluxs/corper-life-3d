@@ -1,4 +1,4 @@
-# Corper Life 3D
+# Corper Wee
 
 A realistic 3D life simulator of the Nigerian service year: call-up, orientation camp, PPA, CDS and passing out.
 Fictional game. Not affiliated with NYSC or the Federal Government of Nigeria.
@@ -11,7 +11,7 @@ Publisher: Swiftmynd Technologies Ltd · Engine: Unity 6 (6000.0 LTS), C# · And
   four hostels with water tanks, kitchen, Mammy Market, clinic, mosque, chapel, SAED tents, football pitch,
   Man O' War obstacles, trees and street lights.
 - Your corper: create a character (name, gender, skin tone, course, home state, family background).
-  Mufti until you collect your kit, then khaki and face cap. 28 other corpers follow the camp timetable.
+  Mufti until you collect your kit, then camp whites (white T-shirt, white shorts, canvas shoes). 28 other corpers follow the camp timetable.
 - Day clock with the real camp routine: 4:30am bugle, drill, lectures, SAED, sports, social night, lights out.
   Day and night lighting.
 - Needs: energy, food, health, mood, hygiene. Faint if you push too hard.
@@ -65,4 +65,4 @@ To get `Unity_lic.ulf` (one time, on any Windows or Mac PC):
 
 ## Open in the Unity editor (optional)
 
-Open the folder with Unity 6000.0 LTS, then menu **Corper Life → Create Main Scene** and press Play.
+Open the folder with Unity 6000.0 LTS, then menu **Corper Wee → Create Main Scene** and press Play.
