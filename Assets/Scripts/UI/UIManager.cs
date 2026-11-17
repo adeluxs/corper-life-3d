@@ -15,6 +15,9 @@ namespace CorperLife
 
         public bool IsModalOpen => dialogOpen || menuOpen || miniGameOpen || fading;
 
+        /// <summary>Shows test shortcuts in the pause menu. Set to false before publishing on Play Store.</summary>
+        public const bool TestMode = true;
+
         bool dialogOpen, menuOpen, miniGameOpen, fading;
 
         // HUD
@@ -284,6 +287,13 @@ namespace CorperLife
                 new DialogButton("Resume", null),
                 new DialogButton("Save", () => { gm.Save(); Toast("Game saved."); }),
                 new DialogButton("More from the developer", ShowDeveloperPromo),
+                new DialogButton("TEST: skip camp to service year", () =>
+                {
+                    gm.State.AddFlag("registered"); gm.State.AddFlag("kit_collected");
+                    if (string.IsNullOrEmpty(gm.State.skill)) gm.State.skill = "ICT and graphics";
+                    gm.State.stage = LifeStage.Posting;
+                    gm.Year.Begin();
+                }, TestMode && gm.State.stage == LifeStage.Camp),
                 new DialogButton("Remove ads", () => Toast("Purchases arrive in a later build.")));
         }
 
