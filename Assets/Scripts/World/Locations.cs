@@ -30,6 +30,19 @@ namespace CorperLife
             { Clinic, "Camp clinic" },
             { Gate, "Camp gate" },
             { Office, "Camp office" },
+            // Town
+            { "lodge", "Corpers' lodge" },
+            { "ppa_school", "Government Secondary School" },
+            { "ppa_office", "TechHub Limited" },
+            { "ppa_hospital", "General Hospital" },
+            { "ppa_lga", "Local Government Secretariat" },
+            { "lgi", "NYSC LGI office" },
+            { "cds", "Community hall (CDS)" },
+            { "buka", "Mama T Buka" },
+            { "bank", "Bank" },
+            { "park", "Motor park" },
+            { "street", "Roadside" },
+            { "home", "Neighbourhood" },
         };
 
         public static string NameOf(string id) =>

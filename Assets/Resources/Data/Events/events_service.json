@@ -1,0 +1,764 @@
+{
+ "events": [
+  {
+   "id": "no_light",
+   "title": "No light",
+   "text": "NEPA took light three days ago. Your phone is dead and the room is hot.",
+   "stage": "ServiceYear",
+   "location": "lodge",
+   "minDay": 1,
+   "maxDay": 999,
+   "minHour": 18,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Buy fuel for the lodge generator",
+     "cost": 3000,
+     "effects": {
+      "mood": 6,
+      "repCommunity": 2,
+      "result": "Light for the night. Everyone thanks you."
+     }
+    },
+    {
+     "label": "Charge at a shop and endure",
+     "cost": 200,
+     "effects": {
+      "energy": -8,
+      "mood": -5,
+      "result": "Hot and mosquito-filled night."
+     }
+    },
+    {
+     "label": "Sleep outside on the veranda",
+     "cost": 0,
+     "effects": {
+      "energy": -3,
+      "health": -5,
+      "result": "Cooler, but the mosquitoes feasted."
+     }
+    }
+   ]
+  },
+  {
+   "id": "landlord_increase",
+   "title": "Landlord wahala",
+   "text": "The landlord says rent is going up because 'everything has increased'.",
+   "stage": "ServiceYear",
+   "location": "lodge",
+   "minDay": 8,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Negotiate politely",
+     "cost": 0,
+     "effects": {
+      "mood": 4,
+      "result": "He agrees to keep it for corpers. Respect."
+     },
+     "riskChance": 0.5,
+     "riskEffects": {
+      "money": -5000,
+      "mood": -6,
+      "result": "He insists. You pay extra this month."
+     }
+    },
+    {
+     "label": "Pay without arguing",
+     "cost": 0,
+     "effects": {
+      "money": -5000,
+      "repCommunity": 2,
+      "result": "He smiles. \"Good corper.\""
+     }
+    }
+   ]
+  },
+  {
+   "id": "student_bribe",
+   "title": "A \"gift\" from a parent",
+   "text": "A parent offers you N10,000 to 'help' their child pass your exam.",
+   "stage": "ServiceYear",
+   "location": "ppa_school",
+   "minDay": 4,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Refuse firmly",
+     "cost": 0,
+     "effects": {
+      "repPpa": 6,
+      "repCommunity": 3,
+      "addFlag": "integrity",
+      "result": "You explain that hard work is the only way. The principal hears about it."
+     }
+    },
+    {
+     "label": "Accept quietly",
+     "cost": 0,
+     "effects": {
+      "money": 10000,
+      "mood": -6,
+      "result": "Nobody found out. But it doesn't feel right."
+     },
+     "riskChance": 0.6,
+     "riskEffects": {
+      "money": 10000,
+      "repPpa": -20,
+      "mood": -12,
+      "result": "Another teacher reports you. The principal issues you a query."
+     }
+    }
+   ]
+  },
+  {
+   "id": "unpaid_ppa",
+   "title": "PPA says no stipend",
+   "text": "Your PPA admin officer announces that corpers won't get stipends this month. \"No money.\"",
+   "stage": "ServiceYear",
+   "location": "ppa",
+   "minDay": 10,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Accept it",
+     "cost": 0,
+     "effects": {
+      "mood": -6,
+      "result": "You adjust your budget."
+     }
+    },
+    {
+     "label": "Complain to your LGI officer",
+     "cost": 0,
+     "effects": {
+      "money": 5000,
+      "result": "The LGI officer intervenes. They pay something small."
+     },
+     "riskChance": 0.6,
+     "riskEffects": {
+      "repPpa": -5,
+      "mood": -4,
+      "result": "Nothing changes, and your boss is annoyed."
+     }
+    }
+   ]
+  },
+  {
+   "id": "boss_errand",
+   "title": "Boss's errand",
+   "text": "Your boss asks you to help carry their personal shopping from the market on your free afternoon.",
+   "stage": "ServiceYear",
+   "location": "ppa",
+   "minDay": 3,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Help out",
+     "cost": 0,
+     "effects": {
+      "energy": -10,
+      "repPpa": 5,
+      "result": "Your boss is grateful and remembers it."
+     }
+    },
+    {
+     "label": "Politely decline",
+     "cost": 0,
+     "effects": {
+      "repPpa": -2,
+      "result": "Your boss shrugs."
+     }
+    }
+   ]
+  },
+  {
+   "id": "japa_cousin",
+   "title": "Your cousin abroad",
+   "text": "Your cousin in Canada calls: \"Start saving now. If you have N400,000 by passing out, I'll help you apply for a master's.\"",
+   "stage": "ServiceYear",
+   "location": "any",
+   "minDay": 6,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 6,
+   "once": true,
+   "choices": [
+    {
+     "label": "I'll start saving",
+     "cost": 0,
+     "effects": {
+      "mood": 8,
+      "addFlag": "japa_goal",
+      "result": "Goal set: save money for a master's abroad."
+     }
+    }
+   ]
+  },
+  {
+   "id": "black_tax",
+   "title": "Family needs help",
+   "text": "Your younger sister's school fees are due. Your parents ask if you can help with N15,000.",
+   "stage": "ServiceYear",
+   "location": "any",
+   "minDay": 10,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Send N15,000",
+     "cost": 0,
+     "effects": {
+      "money": -15000,
+      "mood": 6,
+      "repCommunity": 2,
+      "result": "Your family is grateful. Your sister calls to thank you."
+     }
+    },
+    {
+     "label": "Send N5,000",
+     "cost": 0,
+     "effects": {
+      "money": -5000,
+      "mood": 1,
+      "result": "It helps a bit."
+     }
+    },
+    {
+     "label": "Explain you can't right now",
+     "cost": 0,
+     "effects": {
+      "mood": -8,
+      "result": "They understand, but you feel bad."
+     }
+    }
+   ]
+  },
+  {
+   "id": "owambe",
+   "title": "Owambe invitation",
+   "text": "Your landlord's daughter is getting married this Saturday. The whole street is invited.",
+   "stage": "ServiceYear",
+   "location": "any",
+   "minDay": 5,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Go and enjoy",
+     "cost": 0,
+     "effects": {
+      "hunger": 50,
+      "mood": 20,
+      "energy": -12,
+      "repCommunity": 4,
+      "result": "Jollof, small chops, live band. You danced till evening."
+     }
+    },
+    {
+     "label": "Go and spray money",
+     "cost": 3000,
+     "effects": {
+      "hunger": 50,
+      "mood": 22,
+      "energy": -12,
+      "repCommunity": 8,
+      "result": "You sprayed the couple. The landlord loves you now."
+     }
+    },
+    {
+     "label": "Stay home",
+     "cost": 0,
+     "effects": {
+      "energy": 8,
+      "result": "You rest instead."
+     }
+    }
+   ]
+  },
+  {
+   "id": "malaria_service",
+   "title": "Malaria",
+   "text": "You wake with fever, headache and body pains.",
+   "stage": "ServiceYear",
+   "location": "any",
+   "minDay": 4,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Go to the hospital and run a test",
+     "cost": 4000,
+     "effects": {
+      "health": 35,
+      "skipMinutes": 180,
+      "result": "Malaria confirmed. Treatment and rest."
+     }
+    },
+    {
+     "label": "Buy drugs at the chemist",
+     "cost": 1500,
+     "effects": {
+      "health": 15,
+      "energy": -8,
+      "result": "It helps, but you feel weak for days."
+     }
+    },
+    {
+     "label": "Ignore it",
+     "cost": 0,
+     "effects": {
+      "health": -25,
+      "energy": -15,
+      "result": "Bad idea. You feel terrible."
+     }
+    }
+   ]
+  },
+  {
+   "id": "roommate_food",
+   "title": "Roommate's soup",
+   "text": "Your roommate cooked a big pot of egusi and offers you some.",
+   "stage": "ServiceYear",
+   "location": "lodge",
+   "minDay": 1,
+   "maxDay": 999,
+   "minHour": 17,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Eat and thank them",
+     "cost": 0,
+     "effects": {
+      "hunger": 40,
+      "mood": 8,
+      "repCommunity": 2,
+      "result": "Delicious. You promise to cook next time."
+     }
+    },
+    {
+     "label": "Buy them drinks to say thanks",
+     "cost": 800,
+     "effects": {
+      "hunger": 40,
+      "mood": 10,
+      "repCommunity": 3,
+      "result": "Good vibes all round."
+     }
+    }
+   ]
+  },
+  {
+   "id": "cds_politics",
+   "title": "CDS group drama",
+   "text": "Two members of your CDS group are fighting over who should be group president.",
+   "stage": "ServiceYear",
+   "location": "cds",
+   "minDay": 8,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Mediate between them",
+     "cost": 0,
+     "effects": {
+      "repNysc": 4,
+      "repCommunity": 3,
+      "result": "You calm things down. The LGI officer is impressed."
+     }
+    },
+    {
+     "label": "Run for president yourself",
+     "cost": 0,
+     "effects": {
+      "mood": 12,
+      "repNysc": 5,
+      "addFlag": "cds_president",
+      "result": "You won! You are now CDS group president."
+     },
+     "riskChance": 0.5,
+     "riskEffects": {
+      "mood": -2,
+      "repCommunity": 2,
+      "result": "You lost the election, but people know your name now."
+     }
+    },
+    {
+     "label": "Stay out of it",
+     "cost": 0,
+     "effects": {
+      "result": "Not your business."
+     }
+    }
+   ]
+  },
+  {
+   "id": "police_stop",
+   "title": "Checkpoint",
+   "text": "Police stop the keke you're in and ask everyone for ID.",
+   "stage": "ServiceYear",
+   "location": "street",
+   "minDay": 3,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Show your NYSC ID calmly",
+     "cost": 0,
+     "effects": {
+      "mood": 2,
+      "result": "\"Corper, you can go. Serve your fatherland.\""
+     }
+    },
+    {
+     "label": "Argue about your rights",
+     "cost": 0,
+     "effects": {
+      "mood": -2,
+      "result": "They let you go after a warning."
+     },
+     "riskChance": 0.5,
+     "riskEffects": {
+      "skipMinutes": 60,
+      "mood": -6,
+      "result": "It wastes an hour of your day."
+     }
+    }
+   ]
+  },
+  {
+   "id": "job_fair",
+   "title": "Job fair",
+   "text": "A big company is holding a recruitment drive for corpers at the community hall.",
+   "stage": "ServiceYear",
+   "location": "cds",
+   "minDay": 40,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Attend with your CV",
+     "cost": 0,
+     "effects": {
+      "energy": -6,
+      "mood": 8,
+      "addFlag": "job_lead",
+      "result": "You impress a recruiter. They say they'll call after passing out."
+     }
+    },
+    {
+     "label": "Skip it",
+     "cost": 0,
+     "effects": {
+      "result": "Maybe next time."
+     }
+    }
+   ]
+  },
+  {
+   "id": "hustle_client",
+   "title": "Big client",
+   "text": "Someone saw your side-hustle work and wants to place a big order.",
+   "stage": "ServiceYear",
+   "location": "any",
+   "minDay": 20,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 5,
+   "once": true,
+   "choices": [
+    {
+     "label": "Take the job",
+     "cost": 0,
+     "effects": {
+      "money": 25000,
+      "energy": -20,
+      "mood": 10,
+      "result": "Long days, but the money is good."
+     }
+    }
+   ]
+  },
+  {
+   "id": "phone_snatch",
+   "title": "Phone snatched",
+   "text": "Walking by the road, a man on a bike grabs your phone and speeds off.",
+   "stage": "ServiceYear",
+   "location": "street",
+   "minDay": 12,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 5,
+   "once": true,
+   "choices": [
+    {
+     "label": "Buy a cheap phone to keep going",
+     "cost": 25000,
+     "effects": {
+      "mood": -15,
+      "result": "Lesson learnt: hold your phone tight by the road."
+     }
+    },
+    {
+     "label": "Borrow an old phone from your roommate",
+     "cost": 0,
+     "effects": {
+      "mood": -10,
+      "repCommunity": 1,
+      "result": "It works, barely."
+     }
+    }
+   ]
+  },
+  {
+   "id": "allawee_late",
+   "title": "Allawee rumour",
+   "text": "Corpers in your WhatsApp group say allawee will be late this month. Panic everywhere.",
+   "stage": "ServiceYear",
+   "location": "any",
+   "minDay": 7,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 6,
+   "once": true,
+   "choices": [
+    {
+     "label": "Cut spending until it lands",
+     "cost": 0,
+     "effects": {
+      "hunger": -10,
+      "mood": -4,
+      "result": "You eat beans and garri for a few days."
+     }
+    },
+    {
+     "label": "Ignore the rumour",
+     "cost": 0,
+     "effects": {
+      "mood": 2,
+      "result": "It turns out to be fake news."
+     }
+    }
+   ]
+  },
+  {
+   "id": "hospital_emergency",
+   "title": "Emergency at the ward",
+   "text": "A road accident victim is rushed in and the ward is short-staffed.",
+   "stage": "ServiceYear",
+   "location": "ppa_hospital",
+   "minDay": 5,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Stay late and help",
+     "cost": 0,
+     "effects": {
+      "energy": -20,
+      "repPpa": 10,
+      "mood": 8,
+      "result": "The patient survives. The doctors respect you now."
+     }
+    },
+    {
+     "label": "It's past your hours, go home",
+     "cost": 0,
+     "effects": {
+      "repPpa": -2,
+      "result": "Someone else handles it."
+     }
+    }
+   ]
+  },
+  {
+   "id": "office_bug",
+   "title": "Production bug",
+   "text": "The company app has crashed and the senior engineer is on leave.",
+   "stage": "ServiceYear",
+   "location": "ppa_office",
+   "minDay": 5,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Stay and fix it",
+     "cost": 0,
+     "effects": {
+      "energy": -18,
+      "repPpa": 12,
+      "mood": 10,
+      "result": "You find the bug at 9pm. The CEO hears your name."
+     }
+    },
+    {
+     "label": "Leave it for tomorrow",
+     "cost": 0,
+     "effects": {
+      "repPpa": -4,
+      "result": "Customers complain all night."
+     }
+    }
+   ]
+  },
+  {
+   "id": "lga_idle",
+   "title": "Nothing to do",
+   "text": "Another day at the secretariat with nothing to do but sit.",
+   "stage": "ServiceYear",
+   "location": "ppa_lga",
+   "minDay": 2,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Use the time to learn online",
+     "cost": 0,
+     "effects": {
+      "mood": 6,
+      "addFlag": "learning",
+      "result": "You complete a free online course module."
+     }
+    },
+    {
+     "label": "Volunteer to digitise files",
+     "cost": 0,
+     "effects": {
+      "energy": -6,
+      "repPpa": 6,
+      "result": "Your boss is surprised. \"This corper is serious.\""
+     }
+    },
+    {
+     "label": "Sleep at your desk",
+     "cost": 0,
+     "effects": {
+      "energy": 10,
+      "result": "Nice nap."
+     },
+     "riskChance": 0.4,
+     "riskEffects": {
+      "repPpa": -6,
+      "result": "Your boss caught you."
+     }
+    }
+   ]
+  },
+  {
+   "id": "love_service",
+   "title": "Someone special",
+   "text": "You keep running into the same person at the buka. Today they sit at your table.",
+   "stage": "ServiceYear",
+   "location": "buka",
+   "minDay": 6,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Start a conversation",
+     "cost": 0,
+     "effects": {
+      "mood": 14,
+      "addFlag": "service_crush",
+      "result": "You talk for an hour. You exchange numbers."
+     }
+    },
+    {
+     "label": "Smile and eat",
+     "cost": 0,
+     "effects": {
+      "mood": 2,
+      "result": "Maybe another day."
+     }
+    }
+   ]
+  },
+  {
+   "id": "class_troublemaker",
+   "title": "Troublemaker in class",
+   "text": "A student keeps disrupting your lesson and the class is laughing.",
+   "stage": "ServiceYear",
+   "location": "ppa_school",
+   "minDay": 2,
+   "maxDay": 999,
+   "minHour": 0,
+   "maxHour": 24,
+   "weight": 10,
+   "once": true,
+   "choices": [
+    {
+     "label": "Stay calm and give him a task",
+     "cost": 0,
+     "effects": {
+      "repPpa": 5,
+      "mood": 4,
+      "result": "He settles down and even answers a question. Respect earned."
+     }
+    },
+    {
+     "label": "Send him to the principal",
+     "cost": 0,
+     "effects": {
+      "repPpa": 1,
+      "mood": -2,
+      "result": "Order restored, but the class is cold toward you."
+     }
+    }
+   ]
+  }
+ ]
+}

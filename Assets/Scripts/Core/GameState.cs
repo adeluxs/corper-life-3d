@@ -96,6 +96,22 @@ namespace CorperLife
         public string skill = "";            // SAED skill picked at camp
         public string campRole = "";          // platoon leader, OBS, band...
 
+        // Service year
+        public string ppaType = "";            // school, office, hospital, lga
+        public string housing = "";            // lodge, shared, selfcon
+        public bool hasPos;
+        public int hustleEarnings;
+        public int hustleLevel;
+        public int ppaDaysWorked;
+        public int ppaDaysMissed;
+        public int cdsAttended;
+        public int missedCds;
+        public int clearancesSigned;
+        public int missedClearances;
+        public string projectKind = "";
+        public int projectProgress;
+        public string ending = "";
+
         public bool HasFlag(string f) => flags.Contains(f);
 
         public void AddFlag(string f)

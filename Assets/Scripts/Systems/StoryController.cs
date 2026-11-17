@@ -21,6 +21,8 @@ namespace CorperLife
         public string CurrentObjective()
         {
             if (S == null) return "";
+            if (S.stage == LifeStage.ServiceYear) return gm.Year.CurrentObjective();
+            if (S.stage == LifeStage.PassingOut) return "Service year complete";
             if (S.stage != LifeStage.Camp) return "";
             if (!S.HasFlag("registered")) return "Go to the camp office and register";
             if (!S.HasFlag("found_bunk")) return "Find your bunk in the hostel";
@@ -275,16 +277,10 @@ namespace CorperLife
         public void EndOfCamp()
         {
             S.stage = LifeStage.Posting;
-            string[] ppas =
-            {
-                "Government Secondary School, " + S.profile.deployedState,
-                "a private tech company in the state capital",
-                "the General Hospital",
-                "the Local Government Secretariat",
-                "a community secondary school in a village",
-            };
-            string ppa = ppas[UnityEngine.Random.Range(0, ppas.Length)];
+            gm.Year.AssignPpa();
+            string ppa = ServiceYearController.PpaName(S.ppaType);
             S.AddFlag("ppa_assigned");
+            gm.Save();
             float score = (S.rep.nysc + S.needs.mood) / 2f;
             string summary =
                 "Drills attended: " + S.drillsAttended + "   Missed: " + S.drillsMissed + "\n" +
@@ -295,13 +291,7 @@ namespace CorperLife
             UI.Dialog("Posting letter",
                 "Camp is over! " + (score > 60 ? "You were one of the standout corpers in Platoon " + S.platoon + ". " : "") +
                 "Your posting letter says your PPA is " + ppa + ".\n\n" + summary,
-                new DialogButton("Continue to service year", () =>
-                {
-                    gm.Save();
-                    UI.Dialog("Coming next",
-                        "The service year (PPA, CDS, clearance, allawee and side hustles) is the next part being built.",
-                        new DialogButton("OK", null));
-                }));
+                new DialogButton("Travel to your PPA", () => gm.Year.Begin()));
             AdService.MaybeShowInterstitial("camp_end");
         }
     }

@@ -108,7 +108,8 @@ namespace CorperLife
         {
             if (e.once && s.seenEvents.Contains(e.id)) return false;
             if (e.stage != "Any" && e.stage != s.stage.ToString()) return false;
-            if (e.location != "any" && e.location != loc) return false;
+            if (e.location == "ppa") { if (loc == null || !loc.StartsWith("ppa_")) return false; }
+            else if (e.location != "any" && e.location != loc) return false;
             if (s.day < e.minDay || s.day > e.maxDay) return false;
             if (s.Hour < e.minHour || s.Hour >= e.maxHour) return false;
             if (!string.IsNullOrEmpty(e.requiresFlag) && !s.HasFlag(e.requiresFlag)) return false;

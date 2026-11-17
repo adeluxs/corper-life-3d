@@ -5,26 +5,30 @@ Fictional game. Not affiliated with NYSC or the Federal Government of Nigeria.
 
 Publisher: Swiftmynd Technologies Ltd · Engine: Unity 6 (6000.0 LTS), C# · Android first.
 
-## What's in this build (milestone 1: orientation camp)
+## What's in this build
 
-- 3D orientation camp made in Blender: gate, camp office, parade ground with dais and flags, multipurpose hall,
-  four hostels with water tanks, kitchen, Mammy Market, clinic, mosque, chapel, SAED tents, football pitch,
-  Man O' War obstacles, trees and street lights.
-- Your corper: create a character (name, gender, skin tone, course, home state, family background).
-  Mufti until you collect your kit, then camp whites (white T-shirt, white shorts, canvas shoes). 28 other corpers follow the camp timetable.
-- Day clock with the real camp routine: 4:30am bugle, drill, lectures, SAED, sports, social night, lights out.
-  Day and night lighting.
-- Needs: energy, food, health, mood, hygiene. Faint if you push too hard.
-- Money in naira (in-game amounts), spent at Mammy Market and elsewhere, with a transaction log.
-- Attendance and punishment by soldiers, NYSC record score.
-- Story: registration and state code, finding your bunk, kit collection, swearing-in, SAED skill, camp roles,
-  calls home, posting letter at the end of camp.
-- Mini-games: drill rhythm game, lecture quiz (20 questions).
-- 28 random camp events with choices (theft, mosquitoes, rain at parade, scams, birthday, pageant, football final...).
-- Saves offline. Ads are stubbed (AdService) until AdMob is added.
+**Orientation camp (21 days)**
+- 3D camp made in Blender. You can walk into the hostels (bunk beds, boxes, buckets, fans), multipurpose hall
+  (stage, rows of chairs), kitchen, camp office, clinic, mosque and chapel. Roofs lift off and the camera looks
+  down into the room when you go inside. Parade ground, Mammy Market, SAED tents, football pitch, Man O' War.
+- Character creator; mufti until kit collection, then camp whites (white T-shirt, white shorts, canvas shoes).
+- Real camp timetable from the 4:30am bugle, needs (energy, food, health, mood, hygiene), naira, soldiers'
+  punishments, drill rhythm game, lecture quiz, 28 camp events, posting letter.
 
-Next milestones: service year (PPA, lodge, CDS, clearance, allawee, side hustles, endings), AdMob and Play Billing,
-more locations (city, northern town, village), voice lines.
+**Service year (12 months, 6 days each)**
+- 3D town: corpers' lodge (rooms with mattresses), Government Secondary School (desks, blackboard),
+  TechHub Limited (desks and monitors), General Hospital (wards), Local Government Secretariat,
+  NYSC LGI office, community hall for CDS, Mama T Buka, bank and ATM, market, motor park with danfos and kekes.
+- Housing choice (free lodge, shared room, self-contain) with monthly rent.
+- PPA work shifts, attendance and PPA reputation; retention offers for strong performers.
+- Weekly CDS, monthly clearance at the LGI office, allawee (federal + state + PPA stipend) only if cleared.
+- Side hustles based on your SAED skill, POS business, personal CDS project (borehole, library, outreach).
+- 21 service-year events (NEPA, landlord, bribe attempt, owambe, black tax, malaria, job fair...).
+- Passing out with seven endings (retained, business owner, master's abroad, government job, state award,
+  job hunting, service extended) and a WhatsApp share button.
+- Developer pop-up in the pause menu (rate, WhatsApp, buy me a coffee, hire the developer).
+
+Next: AdMob and Play Billing, voice lines, more towns (northern town, village PPA).
 
 ## Project layout
 

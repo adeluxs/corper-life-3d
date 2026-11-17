@@ -40,6 +40,9 @@ namespace CorperLife
 
         public static List<LocationAction> For(string loc, GameState s)
         {
+            if (s.stage == LifeStage.ServiceYear || s.stage == LifeStage.PassingOut)
+                return GameManager.I.Year.ActionsFor(loc);
+
             var list = new List<LocationAction>();
             var slot = CampSchedule.Current(s.minuteOfDay);
             string slotId = slot?.id;

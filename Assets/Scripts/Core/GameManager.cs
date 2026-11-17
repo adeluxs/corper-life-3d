@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace CorperLife
 {
@@ -16,6 +17,7 @@ namespace CorperLife
         public GameState State { get; private set; }
         public LifeEventSystem Events { get; private set; }
         public StoryController Story { get; private set; }
+        public ServiceYearController Year { get; private set; }
         public UIManager UI { get; private set; }
         public WorldBuilder World { get; private set; }
 
@@ -37,6 +39,7 @@ namespace CorperLife
             Events = new LifeEventSystem();
             Events.LoadAll();
             Story = new StoryController(this);
+            Year = new ServiceYearController(this);
         }
 
         // ---------- Starting ----------
@@ -62,14 +65,29 @@ namespace CorperLife
         public void ContinueGame(GameState loaded)
         {
             State = loaded;
-            BeginPlay();
-            World.PlacePlayerAt(State.HasFlag("registered") ? "LOC_hostel" : "SPAWN_player");
+            if (State.stage == LifeStage.Posting)
+            {
+                BeginPlay();
+                Year.Begin();
+                return;
+            }
+            if (State.stage == LifeStage.ServiceYear || State.stage == LifeStage.PassingOut)
+            {
+                World.LoadArea("town");
+                BeginPlay();
+                World.PlacePlayerAt(State.HasFlag("housed") ? "SPAWN_lodge" : "SPAWN_player");
+            }
+            else
+            {
+                BeginPlay();
+                World.PlacePlayerAt(State.HasFlag("registered") ? "LOC_hostel" : "SPAWN_player");
+            }
             UI.Toast("Welcome back, " + State.profile.firstName + ".");
         }
 
         void BeginPlay()
         {
-            World.ApplyProfile(State.profile, State.HasFlag("kit_collected"));
+            World.ApplyProfile(State.profile, State.stage == LifeStage.Camp && State.HasFlag("kit_collected"));
             lastHour = State.Hour;
             lastSlotId = CampSchedule.Current(State.minuteOfDay)?.id;
             checkedAttendance.Clear();
@@ -123,6 +141,12 @@ namespace CorperLife
             {
                 Story.EndOfCamp();
             }
+            else if (State.stage == LifeStage.ServiceYear)
+            {
+                Year.OnNewDay();
+                if (State.day > ServiceYearController.Months * ServiceYearController.DaysPerMonth && !State.HasFlag("passed_out"))
+                    Year.PassingOut(false);
+            }
         }
 
         void OnNewHour()
@@ -138,8 +162,27 @@ namespace CorperLife
             if (warn != null) UI.Toast(warn, Palette.Warn);
         }
 
+        public void ResetScheduleTracking()
+        {
+            lastHour = State.Hour;
+            lastSlotId = null;
+            checkedAttendance.Clear();
+        }
+
+        /// <summary>Back to the main menu (used after passing out to start a new service year).</summary>
+        public void RestartToMenu()
+        {
+            Running = false;
+            SceneManager.LoadScene(0);
+        }
+
         void CheckSchedule()
         {
+            if (State.stage == LifeStage.ServiceYear || State.stage == LifeStage.PassingOut)
+            {
+                if (State.stage == LifeStage.ServiceYear) Year.Tick();
+                return;
+            }
             if (State.stage != LifeStage.Camp || !State.HasFlag("registered")) return;
 
             var slot = CampSchedule.Current(State.minuteOfDay);
@@ -278,9 +321,10 @@ namespace CorperLife
         {
             UI.FadeSleep(() =>
             {
-                float minutesToWake = State.minuteOfDay < CampSchedule.WakeMinute
-                    ? CampSchedule.WakeMinute - State.minuteOfDay
-                    : 1440f - State.minuteOfDay + CampSchedule.WakeMinute;
+                bool camp = State.stage == LifeStage.Camp;
+                float wake = camp ? CampSchedule.WakeMinute : ServiceYearController.WakeMinute;
+                float minutesToWake = State.minuteOfDay < wake ? wake - State.minuteOfDay : 1440f - State.minuteOfDay + wake;
+                float quality = camp ? 1f : Year.SleepQuality();
                 // Sleep in hour-sized chunks so day changes run normally.
                 while (minutesToWake > 0.01f)
                 {
@@ -288,11 +332,16 @@ namespace CorperLife
                     AdvanceTime(step, 1f, sleeping: true);
                     minutesToWake -= step;
                 }
+                if (quality != 1f) NeedsSystem.Apply(State, energy: (quality - 1f) * 40f, mood: (quality - 1f) * 20f);
                 lastSlotId = null;
                 Save();
-                UI.Toast("Day " + State.day + ". The bugle is sounding!", Palette.Accent);
-                var special = CampSchedule.SpecialDay(State.day);
-                if (special != null) UI.Toast("Today: " + special);
+                if (camp)
+                {
+                    UI.Toast("Day " + State.day + ". The bugle is sounding!", Palette.Accent);
+                    var special = CampSchedule.SpecialDay(State.day);
+                    if (special != null) UI.Toast("Today: " + special);
+                }
+                else if (State.stage == LifeStage.ServiceYear) UI.Toast(Year.DayLabel(), Palette.Accent);
                 AdService.MaybeShowInterstitial("new_day");
                 RefreshActions();
             });

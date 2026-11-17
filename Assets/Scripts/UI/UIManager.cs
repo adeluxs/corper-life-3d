@@ -141,8 +141,8 @@ namespace CorperLife
             if (gm == null || gm.State == null || !hud.gameObject.activeSelf) return;
             var s = gm.State;
 
-            string stage = s.stage == LifeStage.Camp ? "Orientation camp" : "Service year";
-            dayText.text = stage + " - Day " + s.day;
+            dayText.text = s.stage == LifeStage.Camp ? "Orientation camp - Day " + s.day :
+                           s.stage == LifeStage.ServiceYear ? gm.Year.DayLabel() : "Service year complete";
             clockText.text = s.ClockText();
             moneyText.text = Palette.Naira(s.money);
             objectiveText.text = gm.Story.CurrentObjective();
@@ -283,7 +283,21 @@ namespace CorperLife
                 "State code: " + gm.State.profile.callUpNumber + "   Platoon " + gm.State.platoon,
                 new DialogButton("Resume", null),
                 new DialogButton("Save", () => { gm.Save(); Toast("Game saved."); }),
+                new DialogButton("More from the developer", ShowDeveloperPromo),
                 new DialogButton("Remove ads", () => Toast("Purchases arrive in a later build.")));
+        }
+
+        /// <summary>Swiftmynd developer pop-up: rate, chat, coffee, hire.</summary>
+        public void ShowDeveloperPromo()
+        {
+            Dialog("Enjoying Corper Wee?",
+                "Made in Lagos by Swiftmynd Technologies Ltd. Your support keeps the updates coming.",
+                new DialogButton("Rate Corper Wee", () => Application.OpenURL("market://details?id=com.swiftmynd.corperwee")),
+                new DialogButton("Chat with us on WhatsApp", () => Application.OpenURL("https://wa.me/2347011401387")),
+                new DialogButton("Buy me a coffee", () => Application.OpenURL("https://buymeacoffee.com/swalafblogM")),
+                new DialogButton("Hire the developer", () => Application.OpenURL("https://wa.me/2347011401387?text=" +
+                    System.Uri.EscapeDataString("Hello, I saw Corper Wee and I'd like to hire you for a project."))),
+                new DialogButton("Close", null));
         }
 
         public void ShowCharacterCreator(Action<PlayerProfile> onDone)
