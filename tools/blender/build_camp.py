@@ -16,6 +16,8 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 from common import (reset_scene, mat, empty, box, cylinder, sphere, gable_roof, text_mesh,
                     export_fbx, stats, setup_render, render)
+from buildings import (hollow_building, finish_interior, bunk, plastic_chair, table, cabinet, hospital_bed,
+                       pew, ceiling_fan, FZ)
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 OUT = os.path.join(ROOT, "Assets", "Resources", "Models", "camp.fbx")
@@ -49,7 +51,15 @@ M = {
     "black": mat("Black", (25, 25, 25), 0.6),
     "plastic_blue": mat("PlasticBlue", (40, 90, 170), 0.6),
     "plastic_black": mat("PlasticBlack", (30, 32, 35), 0.6),
+    "floor_tile": mat("FloorTile", (205, 200, 188), 0.4),
+    "floor_cement": mat("FloorCement", (150, 146, 140), 0.85),
+    "carpet_green": mat("CarpetGreen", (30, 100, 70), 0.95),
+    "carpet_red": mat("CarpetRed", (150, 40, 45), 0.95),
+    "sheet_blue": mat("SheetBlue", (120, 170, 210), 0.9),
 }
+MATTRESS = [mat("MattressBlue", (40, 90, 150), 0.9), mat("MattressGreen", (50, 120, 80), 0.9),
+            mat("MattressFloral", (180, 70, 90), 0.9)]
+BOXES = [mat("BoxBlack", (30, 30, 34), 0.6), mat("BoxBlue", (40, 70, 140), 0.6), mat("BoxRed", (140, 40, 40), 0.6)]
 CANOPY = [mat("CanopyRed", (196, 52, 46)), mat("CanopyYellow", (230, 182, 40)), mat("CanopyBlue", (40, 104, 180)),
           mat("CanopyGreen", (40, 150, 90)), mat("CanopyOrange", (226, 120, 40)), mat("CanopyStripe", (220, 220, 210))]
 
@@ -99,6 +109,15 @@ def streetlight(name, x, y):
     cylinder(name + "_Pole", 0.07, 6, (x, y, 3), M["metal_dark"], g, segments=8)
     box(name + "_Arm_NOCOL", (0.9, 0.12, 0.08), (x + 0.4, y, 6), M["metal_dark"], g)
     box(name + "_Lamp_NOCOL", (0.5, 0.25, 0.12), (x + 0.8, y, 5.92), M["paint_white"], g)
+
+
+_loc_count = [0]
+
+
+def loc_box(lid, x, y, hx, hy):
+    """Rectangular location (inside a building). Half-sizes hx, hy in metres. Names stay unique."""
+    _loc_count[0] += 1
+    return empty(f"LOC_{lid}__b{float(hx)}x{float(hy)}__i{_loc_count[0]}", (x, y, 0), camp)
 
 
 def loc_marker(lid, x, y, r, rot=0.0):
@@ -175,18 +194,42 @@ for r in range(4):
 loc_marker("parade", 0, 0, 30)
 
 # ---------- Multipurpose hall ----------
-building("Hall", 0, 60, 40, 22, 7.5, M["paint_white"], M["zinc"], door_side="S", roof_h=4.0)
+hall = hollow_building(camp, "Hall", 0, 60, 40, 22, 7.5, M["paint_white"], M["zinc"], M["floor_tile"],
+                       door_side="S", door_w=3.2, roof_h=4.0)
+items = []
+box("Stage", (18, 5, 0.9), (0, 67.8, 0.6), M["wood"], hall)
+items.append(box("t", (3, 0.9, 0.8), (0, 66.5, 1.45), M["sign_green"]))          # high table on stage
+for r in range(9):
+    for c in range(-8, 9):
+        if c == 0:
+            continue                                                         # centre aisle
+        plastic_chair(items, c * 1.0, 51.5 + r * 1.3, facing=-1)
+for x in (-12, 0, 12):
+    for y in (54, 60, 66):
+        ceiling_fan(items, x, y, 7.3)
+finish_interior(hall, "Hall", items)
 box("HallPorch", (14, 4, 0.3), (0, 47.5, 0.15), M["concrete"], camp)
 gable_roof("HallPorchRoof", 14, 4, 0.6, (0, 47.5, 4.2), M["zinc"], camp, overhang=0.2)
 for sx in (-6.5, 6.5):
     cylinder(f"HallPorchPost{sx}", 0.15, 4.2, (sx, 46, 2.1), M["paint_white"], camp, segments=10)
 text_mesh("HallSign_NOCOL", "MULTIPURPOSE HALL", (0, 48.95, 6.2), 1.0, M["sign_green"], camp)
-loc_marker("hall", 0, 44, 11)
+loc_box("hall", 0, 60, 19.5, 10.5)
 
 # ---------- Hostels (west) ----------
 for i, (cy, label) in enumerate([(32, "HOSTEL A"), (12, "HOSTEL B"), (-8, "HOSTEL C"), (-28, "HOSTEL D")]):
-    building(f"Hostel{i}", -72, cy, 42, 10, 4.0, M["paint_cream"], M["zinc"], door_side="E", roof_h=2.2,
-             rust=(i % 2 == 1))
+    hb = hollow_building(camp, f"Hostel{i}", -72, cy, 42, 10, 4.0, M["paint_cream"],
+                         M["zinc_rust"] if i % 2 else M["zinc"], M["floor_cement"], door_side="E", door_w=2.2, roof_h=2.2)
+    items = []
+    for k in range(13):
+        x = -89 + k * 2.75
+        bunk(items, x, cy + 3.5, rot90=True, mattress=MATTRESS[(k + i) % len(MATTRESS)])
+        bunk(items, x, cy - 3.5, rot90=True, mattress=MATTRESS[(k + i + 2) % len(MATTRESS)])
+        items.append(box("box", (0.6, 0.4, 0.35), (x + 1.0, cy + 3.9, FZ + 0.18), BOXES[k % len(BOXES)]))
+        items.append(box("bucket", (0.3, 0.3, 0.35), (x - 1.0, cy - 4.2, FZ + 0.18), M["plastic_blue"]))
+    for x in (-86, -76, -66, -56):
+        ceiling_fan(items, x, cy, 3.9)
+    finish_interior(hb, f"Hostel{i}", items)
+    loc_box("hostel", -72, cy, 20.5, 4.5)
     text_mesh(f"HostelSign{i}_NOCOL", label, (-50.9, cy, 3.3), 0.7, M["sign_green"], camp,
               rot=(math.pi / 2, 0, math.pi / 2))
     # water tank stand
@@ -195,22 +238,43 @@ for i, (cy, label) in enumerate([(32, "HOSTEL A"), (12, "HOSTEL B"), (-8, "HOSTE
             cylinder(f"TankLeg{i}_{sx}_{sy}", 0.06, 3, (-48 + sx, cy + 4 + sy, 1.5), M["metal_dark"], camp, segments=6)
     box(f"TankBase{i}", (2.2, 2.2, 0.15), (-48, cy + 4, 3.05), M["metal_dark"], camp)
     cylinder(f"Tank{i}", 1.0, 1.8, (-48, cy + 4, 4.0), M["plastic_black"], camp, segments=14)
-loc_marker("hostel", -46, 2, 20)
 
 # ---------- Kitchen (north-west) ----------
-building("Kitchen", -55, 62, 20, 12, 4.2, M["paint_white"], M["zinc_rust"], door_side="S", roof_h=1.8)
+kb = hollow_building(camp, "Kitchen", -55, 62, 20, 12, 4.2, M["paint_white"], M["zinc_rust"], M["floor_cement"],
+                     door_side="S", door_w=2.6, roof_h=1.8)
+items = []
+items.append(box("counter", (14, 0.8, 0.9), (-55, 66.5, FZ + 0.45), M["concrete"]))
+for i in range(5):
+    items.append(cylinder("bigpot", 0.5, 0.65, (-61 + i * 3, 66.5, FZ + 1.25), M["metal_dark"], segments=12))
+for i in range(4):
+    items.append(cylinder("gas", 0.18, 0.7, (-63.5 + i * 0.5, 58, FZ + 0.35), M["red"], segments=10))
+table(items, -52, 60, 4, 1.2)
+finish_interior(kb, "Kitchen", items)
 box("KitchenChimney", (1.2, 1.2, 3), (-60, 65, 6.5), M["concrete"], camp)
 for i in range(3):
     cylinder(f"Pot{i}_NOCOL", 0.55, 0.7, (-52 + i * 2.2, 53, 0.55), M["metal_dark"], camp, segments=12)
 box("ServingTable", (8, 1.2, 0.9), (-55, 54.5, 0.45), M["wood"], camp)
-loc_marker("kitchen", -55, 51, 9)
+loc_marker("kitchen", -55, 53, 6)
+loc_box("kitchen", -55, 62, 9.5, 5.5)
 
 # ---------- Camp office (near gate) ----------
-building("Office", -24, -66, 16, 9, 3.8, M["paint_green"], M["zinc"], door_side="E", roof_h=1.5)
+ob = hollow_building(camp, "Office", -24, -66, 16, 9, 3.8, M["paint_green"], M["zinc"], M["floor_tile"],
+                     door_side="E", door_w=2.2, roof_h=1.5)
+items = []
+items.append(box("counter", (0.8, 6, 1.05), (-21, -66, FZ + 0.52), M["wood"]))
+for y in (-68.5, -66, -63.5):
+    table(items, -26, y, 1.6, 0.8)
+    plastic_chair(items, -26, y + 0.8, facing=1)
+    items.append(box("files", (0.5, 0.35, 0.25), (-26.3, y, FZ + 0.93), M["paint_cream"]))
+for y in (-69.5, -68.8, -68.1):
+    cabinet(items, -31.2, y)
+for k in range(5):
+    plastic_chair(items, -18.5, -69 + k * 1.1, color=M["plastic_blue"], facing=1)
+finish_interior(ob, "Office", items)
 text_mesh("OfficeSign_NOCOL", "CAMP OFFICE", (-15.9, -66, 3.0), 0.7, M["paint_white"], camp,
           rot=(math.pi / 2, 0, math.pi / 2))
 box("NoticeBoard", (0.12, 3, 1.6), (-14, -60, 1.6), M["wood"], camp)
-loc_marker("office", -12, -66, 7)
+loc_box("office", -24, -66, 7.5, 4.0)
 
 # ---------- Mammy Market (south-east) ----------
 mk = empty("MammyMarket", (0, 0, 0), camp)
@@ -235,21 +299,43 @@ for sx in (52.5, 64.5):
 loc_marker("market", 59, -50, 17)
 
 # ---------- Clinic and worship (east) ----------
-building("Clinic", 72, 42, 14, 9, 3.6, M["paint_white"], M["zinc"], door_side="W", roof_h=1.4)
+cb = hollow_building(camp, "Clinic", 72, 42, 14, 9, 3.6, M["paint_white"], M["zinc"], M["floor_tile"],
+                     door_side="W", door_w=2.0, roof_h=1.4)
+items = []
+for k in range(4):
+    hospital_bed(items, 70 + k * 1.8, 45.2)
+table(items, 68, 39.5, 1.6, 0.8, top=M["paint_white"])
+cabinet(items, 77.8, 39.2, color=M["paint_white"])
+items.append(box("screen", (0.05, 1.8, 1.6), (73.5, 39.5, FZ + 0.8), M["sheet_blue"]))
+finish_interior(cb, "Clinic", items)
 box("ClinicCrossV_NOCOL", (0.1, 0.5, 1.6), (64.9, 42, 3.0), M["red"], camp)
 box("ClinicCrossH_NOCOL", (0.1, 1.6, 0.5), (64.9, 42, 3.0), M["red"], camp)
-loc_marker("clinic", 62, 42, 6)
+loc_box("clinic", 72, 42, 6.5, 4.0)
 
 # Mosque: block with dome and small minaret
-box("MosqueBody", (11, 11, 4.5), (86, 14, 2.25), M["paint_white"], camp)
-sphere("MosqueDome", 4.0, (86, 14, 4.5), M["paint_green"], camp, scale=(1, 1, 0.85), subdiv=3)
+mb = hollow_building(camp, "Mosque", 86, 14, 11, 11, 4.5, M["paint_white"], M["paint_green"], M["carpet_green"],
+                     door_side="W", door_w=2.2, roof_h=0.4)
+sphere("Mosque_Roof_NOCOL", 4.0, (86, 14, 4.6), M["paint_green"], mb, scale=(1, 1, 0.85), subdiv=3)
+items = []
+for r in range(4):
+    items.append(box("rug", (9.6, 0.9, 0.02), (86, 10 + r * 2.2, FZ + 0.01), M["carpet_red"]))
+items.append(box("mihrab", (0.4, 2.0, 2.8), (91.2, 14, FZ + 1.4), M["paint_green"]))
+finish_interior(mb, "Mosque", items)
 cylinder("Minaret", 0.8, 11, (92.5, 19.5, 5.5), M["paint_white"], camp, segments=12)
 cylinder("MinaretTop", 1.0, 1.6, (92.5, 19.5, 11.6), M["paint_green"], camp, segments=12, radius_top=0.1)
 # Chapel: gable building with a cross
-building("Chapel", 86, -4, 9, 14, 4.5, M["paint_white"], M["paint_blue"], door_side="W", roof_h=3.0)
+chb = hollow_building(camp, "Chapel", 86, -4, 9, 14, 4.5, M["paint_white"], M["paint_blue"], M["floor_tile"],
+                      door_side="W", door_w=2.2, roof_h=3.0)
+items = []
+for r in range(6):
+    pew(items, 85.2, -9 + r * 1.5, 3.0)
+items.append(box("altar", (2.4, 1.0, 1.0), (85.5, 1.0, FZ + 0.5), M["paint_white"]))
+items.append(box("altarcloth", (2.5, 1.05, 0.05), (85.5, 1.0, FZ + 1.02), M["sign_green"]))
+finish_interior(chb, "Chapel", items)
 box("ChapelCrossV_NOCOL", (0.25, 0.25, 2.2), (86, -4 - 7.6, 8.4), M["paint_white"], camp)
 box("ChapelCrossH_NOCOL", (1.3, 0.25, 0.25), (86, -4 - 7.6, 8.9), M["paint_white"], camp)
-loc_marker("worship", 76, 6, 10)
+loc_box("worship", 86, 14, 5.0, 5.0)
+loc_box("worship", 86, -4, 4.0, 6.5)
 
 # ---------- SAED tents (north-east) ----------
 for i in range(4):
@@ -297,10 +383,18 @@ os.makedirs(os.path.dirname(OUT), exist_ok=True)
 export_fbx(OUT)
 print("Exported", OUT)
 
-if "--render" in sys.argv:
+if "--render" in sys.argv or "--interiors" in sys.argv:
     prev = os.path.join(ROOT, "docs", "previews")
     os.makedirs(prev, exist_ok=True)
     setup_render((1280, 720), 20)
     render(os.path.join(prev, "camp_overview.png"), (-95, -125, 75), (0, -5, 0), lens=30)
     render(os.path.join(prev, "camp_parade.png"), (14, -32, 5), (0, 26, 3), lens=28)
     render(os.path.join(prev, "camp_market.png"), (40, -22, 4.5), (60, -48, 1), lens=28)
+    # Interiors, roofs hidden the way the game does when you walk in
+    import bpy
+    for o in bpy.data.objects:
+        if "_Roof_NOCOL" in o.name:
+            o.hide_render = True
+    render(os.path.join(prev, "interior_hostel.png"), (-58, 24, 9), (-74, 12, 0), lens=26)
+    render(os.path.join(prev, "interior_hall.png"), (8, 40, 12), (0, 60, 0), lens=26)
+    render(os.path.join(prev, "interior_clinic_office.png"), (-14, -78, 10), (-24, -66, 0), lens=30)

@@ -12,6 +12,9 @@ namespace CorperLife
         public float yaw;
         public float pitch = 18f;
         public bool previewMode;   // close-up front view for the character creator
+        public bool indoor;        // inside a building: look down into the room (roof is hidden)
+
+        float indoorBlend;
 
         int dragFinger = -1;
         Vector2 lastPos;
@@ -30,12 +33,17 @@ namespace CorperLife
 
             HandleLook();
 
-            var rot = Quaternion.Euler(pitch, yaw, 0);
-            Vector3 pivot = target.position + Vector3.up * height;
-            Vector3 desired = pivot - rot * Vector3.forward * distance;
+            // Indoors the camera rises above the walls and looks down, like a doll's house.
+            indoorBlend = Mathf.MoveTowards(indoorBlend, indoor ? 1f : 0f, Time.deltaTime * 2.5f);
+            float usePitch = Mathf.Lerp(pitch, Mathf.Max(pitch, 56f), indoorBlend);
+            float useDist = Mathf.Lerp(distance, 8.5f, indoorBlend);
 
-            // Pull in if a wall is between the camera and the player.
-            if (Physics.SphereCast(pivot, 0.25f, (desired - pivot).normalized, out var hit, distance, ~0, QueryTriggerInteraction.Ignore))
+            var rot = Quaternion.Euler(usePitch, yaw, 0);
+            Vector3 pivot = target.position + Vector3.up * height;
+            Vector3 desired = pivot - rot * Vector3.forward * useDist;
+
+            // Outdoors, pull in if a wall is between the camera and the player.
+            if (indoorBlend < 0.5f && Physics.SphereCast(pivot, 0.25f, (desired - pivot).normalized, out var hit, useDist, ~0, QueryTriggerInteraction.Ignore))
                 if (hit.transform != target && !hit.transform.IsChildOf(target))
                     desired = pivot + (desired - pivot).normalized * Mathf.Max(1.2f, hit.distance - 0.2f);
 
